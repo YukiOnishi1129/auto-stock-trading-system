@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "name": "💻 Client",
+      "path": "./web/client"
+    },
+    {
+      "name": "🌉 Gateway",
+      "path": "./gateway/backend-for-frontend/"
+    },
+    {
+      "name": "🙋‍♂️ User-service",
+      "path": "./micro-service/user-service/"
+    },
+    {
+      "name": "🌏 Root",
+      "path": "./"
+    }
+  ]
+}
