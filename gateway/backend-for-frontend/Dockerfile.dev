@@ -1,0 +1,10 @@
+FROM --platform=linux/amd64 node:20-alpine
+RUN npm i -g @nestjs/cli
+
+WORKDIR /app
+
+COPY /gateway/backend-for-frontend /app
+
+RUN npm install --frozen-lockfile
+
+CMD ["npm", "run", "start:dev"]
