@@ -16,7 +16,7 @@ db-ssh:
 	docker exec -it $(MYSQL_HOST) sh
 ## bff container
 bff-ssh:
-	docker exec -it $(BFF_CONTAINER) sh
+	docker exec -it $(BFF_CONTAINER_NAME) sh
 ## user service container
 user-ssh:
-	docker exec -it $(USER_SERVICE_CONTAINER) sh
+	docker exec -it $(USER_SERVICE_CONTAINER_NAME) sh
