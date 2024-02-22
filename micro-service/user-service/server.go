@@ -7,6 +7,7 @@ import (
 	"net"
 	"os"
 	"os/signal"
+	"time"
 
 	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/pkg/grpc"
 	"google.golang.org/grpc"
@@ -53,6 +54,24 @@ func main() {
 	s.GracefulStop()
 }
 
+// Hello is a simple unary RPC
 func (s *myServer) Hello(ctx context.Context, req *hellopb.HelloRequest) (*hellopb.HelloResponse, error) {
+	// get the name from the request
 	return &hellopb.HelloResponse{Message: fmt.Sprintf("Hello, %s!", req.GetName())}, nil
+}
+
+// HelloServerStream is a server streaming RPC
+func (s *myServer) HelloServerStream(req *hellopb.HelloRequest, stream hellopb.GreetingService_HelloServerStreamServer) error {
+	resCount := 5;
+	for i := 0; i < resCount; i++ {
+		// send a message to the client
+		if err := stream.Send(&hellopb.HelloResponse{
+			Message: fmt.Sprintf("[%d] Hello, %s!", i, req.GetName()),
+		}); err != nil {
+			return err
+		}
+		time.Sleep(time.Second * 1)
+	}
+	// return nil to indicate that the stream has finished
+	return nil
 }

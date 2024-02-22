@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"context"
+	"errors"
 	"fmt"
+	"io"
 	"os"
 
 	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/pkg/grpc"
@@ -41,7 +43,8 @@ func main() {
 
 	for {
 		fmt.Println("1: send Request")
-		fmt.Println("2: exit")
+		fmt.Println("2: HelloServerStream")
+		fmt.Println("3: exit")
 		fmt.Print("please enter >")
 
 		scanner.Scan()
@@ -52,6 +55,9 @@ func main() {
 				Hello()
 
 			case "2":
+				HelloServerStream()
+
+			case "3":
 				fmt.Println("bye.")
 				goto M
 		}
@@ -75,5 +81,37 @@ func Hello() {
 	} else {
 		// print the response message
 		fmt.Println(res.GetMessage())
+	}
+}
+
+func HelloServerStream() {
+	fmt.Println("Please enter your name:")
+	scanner.Scan()
+	name := scanner.Text()
+
+	// create a request message
+	req := &hellopb.HelloRequest{Name: name}
+
+	// send the request to the gRPC server
+	// receive stream from the gRPC server
+	stream, err := client.HelloServerStream(context.Background(), req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	for {
+		// receive the response message from the gRPC server
+		res, err := stream.Recv()
+		if errors.Is(err, io.EOF) {
+			fmt.Println("all the responses have already received")
+			break
+		}
+
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
+		fmt.Println(res)
 	}
 }

@@ -7,7 +7,10 @@ package auto.trading.hello.v1;
 import "google/protobuf/timestamp.proto";
 
 service GreetingService {
+    // unary
     rpc Hello (HelloRequest) returns (HelloResponse) {};
+    // server streaming
+    rpc HelloServerStream (HelloRequest) returns (stream HelloResponse) {};
 }
 
 message HelloRequest {
