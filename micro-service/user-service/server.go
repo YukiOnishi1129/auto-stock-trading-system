@@ -95,3 +95,23 @@ func (s *myServer) HelloClientStream(stream hellopb.GreetingService_HelloClientS
 		nameList = append(nameList, req.GetName())
 	}
 }
+
+// HelloBiStreams is a bidirectional streaming RPC
+func (s *myServer) HelloBiStreams(stream hellopb.GreetingService_HelloBiStreamsServer) error {
+	for {
+		// recieve request from the client
+		req, err := stream.Recv()
+		if errors.Is(err, io.EOF) {
+			return nil
+		}
+		if err != nil {
+			return err
+		}
+		// send a message to the client
+		if err := stream.Send(&hellopb.HelloResponse{
+			Message: fmt.Sprintf("Hello, %s!", req.GetName()),
+		}); err != nil {
+			return err
+		}
+	}
+}
