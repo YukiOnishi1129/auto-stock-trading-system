@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: ${MYSQL_HOST}
+    image: mysql:8.3.0
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Tokyo
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/mysql/initialize:/docker-entrypoint-initdb.d
+      - ./db/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_CONTAINER_PORT}
+
+volumes:
+  mysql_data:
