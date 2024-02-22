@@ -11,6 +11,8 @@ service GreetingService {
     rpc Hello (HelloRequest) returns (HelloResponse) {};
     // server streaming
     rpc HelloServerStream (HelloRequest) returns (stream HelloResponse) {};
+    // client streaming
+    rpc HelloClientStream (stream HelloRequest) returns (HelloResponse) {};
 }
 
 message HelloRequest {

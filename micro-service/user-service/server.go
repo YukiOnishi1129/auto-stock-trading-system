@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"io"
 	"log"
 	"net"
 	"os"
@@ -74,4 +76,22 @@ func (s *myServer) HelloServerStream(req *hellopb.HelloRequest, stream hellopb.G
 	}
 	// return nil to indicate that the stream has finished
 	return nil
+}
+
+// HelloClientStream is a client streaming RPC
+func (s *myServer) HelloClientStream(stream hellopb.GreetingService_HelloClientStreamServer) error {
+	nameList := make([]string, 0)
+	for {
+		// get request from the client
+		req, err := stream.Recv()
+		if errors.Is(err, io.EOF) {
+			// finish reading the client stream
+			message := fmt.Sprintf("Hello, %v!", nameList)
+			return stream.SendAndClose(&hellopb.HelloResponse{Message: message})
+		}
+		if err != nil {
+			return err
+		}
+		nameList = append(nameList, req.GetName())
+	}
 }
