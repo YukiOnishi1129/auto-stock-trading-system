@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { GrpcMethod } from '@nestjs/microservices';
+import { Hello } from '../graphql/types/graphql';
 
 @Injectable()
 export class HelloService {
-  @GrpcMethod('HelloService', 'Hello')
-  hello(data: { name: string }) {
-    return { message: `Hello, ${data.name}!` };
+  async getHello(name: string): Promise<Hello> {
+    return {
+      message: `This action returns a #${name} hello`,
+    };
   }
 }
