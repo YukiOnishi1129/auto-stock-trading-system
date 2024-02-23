@@ -3,13 +3,14 @@
 # Root directory of app
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
-PROTO_FILE_DIR=./pkg/proto
+PROTO_FILE_DIR=./gateway/backend-for-frontend/src/proto
 API_PROTO_FILES=$(find ${PROTO_FILE_DIR} -type f -name '*.proto')
 
 # User Service Generate
-# echo "Generating code for User Service..."
-OUT_DIR_USER_SEVICE="${ROOT_DIR}/micro-service/user-service/pkg/grpc"
-PROTO_OUT_DIR_USER_SEVICE="./micro-service/user-service/pkg/grpc"
+# echo "Generating code for User Service... "
+
+OUT_DIR_USER_SEVICE="${ROOT_DIR}/micro-service/user-service/grpc"
+PROTO_OUT_DIR_USER_SEVICE="./micro-service/user-service/grpc"
 
 ## Clean all existing generated files
 rm -r "${OUT_DIR_USER_SEVICE}"
@@ -27,13 +28,13 @@ protoc \
 
 # BFF Generate
 # echo "Generating code for BFF..."
-SRC_DIR="${ROOT_DIR}/pkg/proto"
+SRC_DIR="${ROOT_DIR}/gateway/backend-for-frontend/src/proto"
 
 ## Path to Protoc Plugin
 PROTOC_GEN_TS_PATH="${ROOT_DIR}/gateway/backend-for-frontend/node_modules/.bin/protoc-gen-ts_proto"
 
 ## Directory to write generated code (.d.ts files)
-OUT_DIR_BFF="${ROOT_DIR}/gateway/backend-for-frontend/pkg/grpc"
+OUT_DIR_BFF="${ROOT_DIR}/gateway/backend-for-frontend/src/grpc"
 
 ## Clean all existing generated files
 rm -r "${OUT_DIR_BFF}"

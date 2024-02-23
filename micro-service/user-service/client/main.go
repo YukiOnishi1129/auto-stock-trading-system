@@ -8,7 +8,7 @@ import (
 	"io"
 	"os"
 
-	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/pkg/grpc"
+	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/grpc"
 	_ "google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

@@ -11,7 +11,7 @@ import (
 	"os/signal"
 	"time"
 
-	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/pkg/grpc"
+	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/grpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -25,8 +25,8 @@ func NewMyServer() *myServer {
 }
 
 func main() {
-	// crate a listener on TCP port 8080
-	port := 8080
+	// crate a listener on TCP port 3001
+	port := 3001
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
 		fmt.Println("Error listening:", err.Error())

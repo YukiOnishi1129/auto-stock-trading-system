@@ -8,6 +8,8 @@ services:
       dockerfile: ./gateway/backend-for-frontend/Dockerfile.dev
     environment:
       - TZ=Asia/Tokyo
+    volumes:
+      - ./gateway/backend-for-frontend:/app
     ports:
       - ${BFF_PORT}:${BFF_CONTAINER_PORT}
     depends_on:
@@ -24,6 +26,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - TZ=Asia/Tokyo
+    volumes:
+      - ./micro-service/user-service:/app
     ports:
       - ${USER_SERVICE_PORT}:${USER_SERVICE_CONTAINER_PORT}
     depends_on:
