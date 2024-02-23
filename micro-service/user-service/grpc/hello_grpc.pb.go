@@ -154,7 +154,7 @@ func (x *greetingServiceHelloBiStreamsClient) Recv() (*HelloResponse, error) {
 }
 
 // GreetingServiceServer is the server API for GreetingService service.
-// All implementations must embed UnimplementedGreetingServiceServer
+// All implementations should embed UnimplementedGreetingServiceServer
 // for forward compatibility
 type GreetingServiceServer interface {
 	// unary
@@ -165,10 +165,9 @@ type GreetingServiceServer interface {
 	HelloClientStream(GreetingService_HelloClientStreamServer) error
 	// bidirectional streaming
 	HelloBiStreams(GreetingService_HelloBiStreamsServer) error
-	mustEmbedUnimplementedGreetingServiceServer()
 }
 
-// UnimplementedGreetingServiceServer must be embedded to have forward compatible implementations.
+// UnimplementedGreetingServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedGreetingServiceServer struct {
 }
 
@@ -184,7 +183,6 @@ func (UnimplementedGreetingServiceServer) HelloClientStream(GreetingService_Hell
 func (UnimplementedGreetingServiceServer) HelloBiStreams(GreetingService_HelloBiStreamsServer) error {
 	return status.Errorf(codes.Unimplemented, "method HelloBiStreams not implemented")
 }
-func (UnimplementedGreetingServiceServer) mustEmbedUnimplementedGreetingServiceServer() {}
 
 // UnsafeGreetingServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to GreetingServiceServer will

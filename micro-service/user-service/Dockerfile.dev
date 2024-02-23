@@ -9,4 +9,6 @@ COPY /micro-service/user-service /app
 RUN go mod tidy && \
     go install github.com/cosmtrek/air@v1.46.0
 
+EXPOSE 3001
+
 CMD ["air", "-c", ".air.toml"]

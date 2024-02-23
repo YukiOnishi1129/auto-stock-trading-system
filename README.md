@@ -9,4 +9,5 @@ This system allows you to buy and sell stocks automatically.
 - backend for frontend
   - nextjs
 - micro service
+
   - go

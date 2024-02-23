@@ -1,4 +1,5 @@
 include .env
+# include ./scripts/protoc-generate.sh
 
 empty:
 	echo "empty"
@@ -20,3 +21,8 @@ bff-ssh:
 ## user service container
 user-ssh:
 	docker exec -it $(USER_SERVICE_CONTAINER_NAME) sh
+
+# generate
+## generate proto
+gen-proto:
+	$(shell ./scripts/protoc-generate.sh)
