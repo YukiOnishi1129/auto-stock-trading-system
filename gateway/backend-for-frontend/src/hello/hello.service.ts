@@ -1,12 +1,8 @@
 import { Injectable, OnModuleInit, Inject } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-// import { Hello } from '../graphql/types/graphql';
-import {
-  GreetingServiceClient,
-  HelloRequest,
-  HelloResponse,
-} from '../grpc/hello';
-import { Observable } from 'rxjs';
+import { Hello } from '../graphql/types/graphql';
+import { GreetingServiceClient, HelloRequest } from '../grpc/hello';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class HelloService implements OnModuleInit {
@@ -19,14 +15,11 @@ export class HelloService implements OnModuleInit {
       this.client.getService<GreetingServiceClient>('GreetingService');
   }
 
-  getHello(name: string): Observable<HelloResponse> {
-    return this.greetingService.hello({ name } as HelloRequest);
-    // const massageList: Array<string> = [];
-    // response.forEach((res) => {
-    //   massageList.push(res.message);
-    // });
-    // return {
-    //   message: massageList[0],
-    // };
+  async getHello(name: string): Promise<Hello> {
+    const rpcResponse = this.greetingService.hello({ name } as HelloRequest);
+    const response = await lastValueFrom(rpcResponse);
+    return {
+      message: response.message,
+    };
   }
 }
