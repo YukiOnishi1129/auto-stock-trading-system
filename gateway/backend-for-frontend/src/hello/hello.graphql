@@ -3,5 +3,5 @@ type Hello {
 }
 
 type Query {
-  getHello(name: String!): Hello!
+  hello(name: String!): Hello!
 }

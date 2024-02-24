@@ -7,7 +7,7 @@ export class HelloResolver {
   constructor(private readonly helloService: HelloService) {}
 
   @Query(() => Hello)
-  async getHello(@Args('name') name: string): Promise<Hello> {
+  async hello(@Args('name') name: string): Promise<Hello> {
     return this.helloService.getHello(name);
   }
 }

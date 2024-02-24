@@ -13,7 +13,7 @@ export class Hello {
 }
 
 export abstract class IQuery {
-    abstract getHello(name: string): Hello | Promise<Hello>;
+    abstract hello(name: string): Hello | Promise<Hello>;
 }
 
 type Nullable<T> = T | null;
