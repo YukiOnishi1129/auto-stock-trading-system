@@ -22,6 +22,14 @@ bff-ssh:
 user-ssh:
 	docker exec -it $(USER_SERVICE_CONTAINER_NAME) sh
 
+
+# db migration
+db-migrate:
+	migrate -source file://micro-service/batch-service/migrations -database 'mysql://user:password@tcp(localhost:3306)/AUTO_STOCK_TRADING_SYSTEM?multiStatements=true' up
+
+db-rollback:
+	migrate -source file://micro-service/batch-service/migrations -database 'mysql://user:password@tcp(localhost:3306)/AUTO_STOCK_TRADING_SYSTEM?multiStatements=true' down
+
 # generate
 ## generate proto
 gen-proto:
