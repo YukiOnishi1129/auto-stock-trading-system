@@ -7,7 +7,7 @@ empty:
 dcb:
 	docker compose build
 dcu:
-	docker compose up
+	docker compose up -d bff
 dcd:
 	docker compose down
 

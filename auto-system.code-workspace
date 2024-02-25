@@ -13,6 +13,10 @@
       "path": "./micro-service/user-service/"
     },
     {
+      "name": "🤖 Batch-service",
+      "path": "./micro-service/batch-service/"
+    },
+    {
       "name": "🌏 Root",
       "path": "./"
     }

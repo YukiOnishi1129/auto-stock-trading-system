@@ -1,4 +1,4 @@
-module github.com/YukiOnishi1129/auto-stock-trading-system
+module github.com/YukiOnishi1129/auto-stock-trading-system/user-service
 
 go 1.22
 

@@ -11,7 +11,7 @@ import (
 	"os/signal"
 	"time"
 
-	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/grpc"
+	hellopb "github.com/YukiOnishi1129/auto-stock-trading-system/user-service/grpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
