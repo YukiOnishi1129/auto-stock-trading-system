@@ -26,6 +26,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PORT=${MYSQL_PORT}
       - TZ=Asia/Tokyo
     volumes:
       - ./micro-service/user-service:/app
@@ -40,10 +41,12 @@ services:
       context: .
       dockerfile: ./micro-service/batch-service/Dockerfile.dev
     environment:
+      - MYSQL_HOST=${MYSQL_HOST}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PORT=${MYSQL_PORT}
       - TZ=Asia/Tokyo
     volumes:
       - ./micro-service/batch-service:/app
