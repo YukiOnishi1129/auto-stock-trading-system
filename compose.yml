@@ -14,7 +14,8 @@ services:
       - ${BFF_PORT}:${BFF_CONTAINER_PORT}
     depends_on:
       - user-service
-  
+      - batch-service
+
   user-service:
     container_name: ${USER_SERVICE_CONTAINER_NAME}
     build:
@@ -25,11 +26,32 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PORT=${MYSQL_PORT}
       - TZ=Asia/Tokyo
     volumes:
       - ./micro-service/user-service:/app
     ports:
       - ${USER_SERVICE_PORT}:${USER_SERVICE_CONTAINER_PORT}
+    depends_on:
+      - db
+
+  batch-service:
+    container_name: ${BATCH_SERVICE_CONTAINER_NAME}
+    build:
+      context: .
+      dockerfile: ./micro-service/batch-service/Dockerfile.dev
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./micro-service/batch-service:/app
+    ports:
+      - ${BATCH_SERVICE_PORT}:${BATCH_SERVICE_CONTAINER_PORT}
     depends_on:
       - db
 
@@ -44,8 +66,8 @@ services:
       - TZ=Asia/Tokyo
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./db/mysql/initialize:/docker-entrypoint-initdb.d
-      - ./db/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/dbms/mysql/initialize:/docker-entrypoint-initdb.d
+      - ./db/dbms/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - ${MYSQL_PORT}:${MYSQL_CONTAINER_PORT}
 
