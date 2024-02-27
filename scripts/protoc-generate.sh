@@ -26,6 +26,26 @@ protoc \
 # echo "Generating code for User Service... Done"
 
 
+# Batch Service Generate
+# echo "Generating code for Batch Service... "
+
+OUT_DIR_BATCH_SEVICE="${ROOT_DIR}/micro-service/batch-service/grpc"
+PROTO_OUT_DIR_BATCH_SEVICE="./micro-service/batch-service/grpc"
+
+## Clean all existing generated files
+rm -r "${OUT_DIR_BATCH_SEVICE}"
+mkdir "${OUT_DIR_BATCH_SEVICE}"
+
+## Generate code at User Service
+protoc \
+  -I=${PROTO_FILE_DIR} \
+  --go_out=paths=source_relative:${PROTO_OUT_DIR_BATCH_SEVICE} \
+  --go-grpc_out=paths=source_relative,require_unimplemented_servers=false:${PROTO_OUT_DIR_USER_SEVICE} \
+  ${API_PROTO_FILES};
+
+# echo "Generating code for Batch Service... Done"
+
+
 # BFF Generate
 # echo "Generating code for BFF..."
 SRC_DIR="${ROOT_DIR}/gateway/backend-for-frontend/src/proto"
