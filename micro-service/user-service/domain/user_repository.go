@@ -1,26 +1,22 @@
-package main
+package domain
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
-	"github.com/YukiOnishi1129/auto-stock-trading-system/batch-service/database/seed"
+	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/database/entity"
 	"github.com/go-sql-driver/mysql"
 	"os"
 	"time"
 )
 
-func main() {
-	conn, dbErr := connectDB()
+func Init() (*sql.DB, error) {
+	db, dbErr := connectDB()
 	if dbErr != nil {
 		fmt.Printf("Error connecting to DB\n")
-		panic(dbErr)
+		return nil, dbErr
 	}
-
-	seedErr := seed.CreateInitData(conn)
-	if seedErr != nil {
-		fmt.Printf("Error seeding data\n")
-		panic(seedErr)
-	}
+	return db, nil
 }
 
 func connectDB() (*sql.DB, error) {
@@ -45,4 +41,16 @@ func connectDB() (*sql.DB, error) {
 	}
 
 	return db, nil
+}
+
+func GetUsers(ctx context.Context) ([]*entity.User, error) {
+	db, dbErr := Init()
+	if dbErr != nil {
+		return nil, dbErr
+	}
+	users, qErr := entity.Users().All(ctx, db)
+	if qErr != nil {
+		return nil, qErr
+	}
+	return users, nil
 }

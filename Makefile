@@ -52,5 +52,10 @@ create-entity:
 # 	docker exec -it ${BATCH_SERVICE_CONTAINER_NAME} sh -c "sqlboiler mysql -c database/sqlboiler.toml -o database/entity -p entity --no-tests --wipe"
 
 # go library install
+# name="library path"
+## batch-service
 go-add-library-batch:
 	docker exec -it ${BATCH_SERVICE_CONTAINER_NAME} sh -c "go get ${name}"
+## user-service
+go-add-library-user:
+	docker exec -it ${USER_SERVICE_CONTAINER_NAME} sh -c "go get ${name}"
