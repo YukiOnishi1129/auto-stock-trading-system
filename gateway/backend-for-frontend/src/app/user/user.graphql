@@ -1,8 +1,13 @@
 type User {
+  id: ID!
   name: String!
   email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
 }
 
 type Query {
   user(id: ID!): User!
+  users: [User!]!
 }

@@ -43,6 +43,7 @@ message User {
     string name = 3;
     google.protobuf.Timestamp created_at = 4;
     google.protobuf.Timestamp updated_at = 5;
+    optional google.protobuf.Timestamp deleted_at = 6;
 }
 
 message UserResponse {
