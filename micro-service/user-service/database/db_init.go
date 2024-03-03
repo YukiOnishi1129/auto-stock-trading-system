@@ -1,26 +1,20 @@
-package main
+package database
 
 import (
 	"database/sql"
 	"fmt"
-	"github.com/YukiOnishi1129/auto-stock-trading-system/batch-service/database/seed"
 	"github.com/go-sql-driver/mysql"
 	"os"
 	"time"
 )
 
-func main() {
-	conn, dbErr := connectDB()
+func Init() (*sql.DB, error) {
+	db, dbErr := connectDB()
 	if dbErr != nil {
 		fmt.Printf("Error connecting to DB\n")
-		panic(dbErr)
+		return nil, dbErr
 	}
-
-	seedErr := seed.CreateInitData(conn)
-	if seedErr != nil {
-		fmt.Printf("Error seeding data\n")
-		panic(seedErr)
-	}
+	return db, nil
 }
 
 func connectDB() (*sql.DB, error) {
