@@ -23,16 +23,18 @@ func Init() {
 		return
 	}
 
-	//	repository
+	//	infrasturcture
 	ur := repository.NewUserRepository(db)
 
 	//	usecase
-	uu := usecase.NewUserUsecase(db, ur)
+	uu := usecase.NewUserUsecase(ur)
 
 	//	presenter
-	up := presenter.NewUserPresenter(db, uu)
+	hp := presenter.NewHelloPresenter()
+	up := presenter.NewUserPresenter(uu)
 
 	// crate a listener on TCP port 3001
+	//port := os.Getenv("USER_SERVICE_CONTAINER_PORT")
 	port := 3001
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
@@ -44,7 +46,7 @@ func Init() {
 	s := grpc.NewServer()
 
 	// register the greeting service with the gRPC server
-	pb.RegisterGreetingServiceServer(s, presenter.NewHelloPresenter())
+	pb.RegisterGreetingServiceServer(s, hp)
 	pb.RegisterUserServiceServer(s, up)
 
 	// register reflection service on gRPC server

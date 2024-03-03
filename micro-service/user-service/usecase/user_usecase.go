@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"context"
-	"database/sql"
 	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/database/entity"
 	pb "github.com/YukiOnishi1129/auto-stock-trading-system/user-service/grpc"
 	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/infrastructure/mysql/repository"
@@ -15,12 +14,11 @@ type UserUsecaseInterface interface {
 }
 
 type UserUsecase struct {
-	db *sql.DB
 	ur *repository.UserRepository
 }
 
-func NewUserUsecase(db *sql.DB, ur *repository.UserRepository) *UserUsecase {
-	return &UserUsecase{db, ur}
+func NewUserUsecase(ur *repository.UserRepository) *UserUsecase {
+	return &UserUsecase{ur}
 }
 
 // GetUsers is a usecase to get all users
@@ -34,8 +32,8 @@ func (uu *UserUsecase) GetUsers(ctx context.Context) (*pb.UsersResponse, error) 
 	for _, user := range users {
 		resUsers = append(resUsers, &pb.User{
 			Id:        strconv.Itoa(user.ID),
-			Email:     user.Email,
-			Name:      user.Name,
+			Email:     user.Email.String,
+			Name:      user.Name.String,
 			CreatedAt: timestamppb.New(user.CreatedAt),
 			UpdatedAt: timestamppb.New(user.UpdatedAt),
 		})
