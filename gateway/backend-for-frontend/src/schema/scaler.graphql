@@ -1,7 +1,7 @@
 """
 dateTime type
 """
-scalar DateTime
+scalar Date
 
 """
 upload type

@@ -36,6 +36,7 @@
     "csurf": "^1.11.0",
     "google-protobuf": "^3.21.2",
     "graphql": "^16.8.1",
+    "graphql-type-json": "^0.3.2",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "ts-morph": "^21.0.1",

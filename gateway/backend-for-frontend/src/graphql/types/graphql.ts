@@ -26,15 +26,14 @@ export class User {
     id: string;
     name: string;
     email: string;
-    createdAt: DateTime;
-    updatedAt: DateTime;
-    deletedAt?: Nullable<DateTime>;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt?: Nullable<string>;
 }
 
 export abstract class IMutation {
     abstract _empty(): Nullable<string> | Promise<Nullable<string>>;
 }
 
-export type DateTime = any;
 export type Upload = any;
 type Nullable<T> = T | null;

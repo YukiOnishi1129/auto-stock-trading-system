@@ -8,6 +8,11 @@ const config: CodegenConfig = {
     "src/graphql/": {
       preset: "client",
       plugins: [],
+      config: {
+        scalars: {
+          DateTime: String,
+        },
+      },
     },
   },
 };

@@ -17,13 +17,17 @@ export class UserService implements OnModuleInit {
     const rpcResponse = this.userService.getUsers({});
     const response = await lastValueFrom(rpcResponse);
     const resUsers = response.users.map((user) => {
+      const date = user.createdAt;
+
+      console.log(new Date(date.seconds * 1000));
+
       const resUser: User = {
         id: user.id,
         name: user.name,
         email: user.email,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-        deletedAt: user.deletedAt,
+        createdAt: new Date(user.createdAt.seconds * 1000).toString(),
+        updatedAt: new Date(user.updatedAt.seconds * 1000).toString(),
+        deletedAt: new Date(user.deletedAt.seconds * 1000).toString(),
       };
       return resUser;
     });
