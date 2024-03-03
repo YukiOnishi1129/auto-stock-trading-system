@@ -1,6 +1,7 @@
 import { getClient } from "@/lib/client";
 import { gql } from "@apollo/client";
 import { GetHomeQuery, Query } from "@/graphql/graphql";
+import { convertDate } from "@/lib/utils/date";
 
 export const GET_HOME = gql`
   query getHome($name: String!) {
@@ -28,7 +29,6 @@ export default async function Home() {
   if (error) return <b>Error: {error.message}</b>;
   if (loading) return <b>Loading...</b>;
   const hello = data?.hello;
-  console.log(new Date(data?.users[0].createdAt.seconds.low * 1000));
   return (
     <div>
       <p>テスト</p>
@@ -38,8 +38,9 @@ export default async function Home() {
           <div key={user.id}>
             <p>{user.name}</p>
             <p>{user.email}</p>
-            {/* <p>{user.createdAt}</p> */}
-            {/* <p>{user.updatedAt}</p> */}
+            <p>{convertDate(user.createdAt)}</p>
+            <p>{convertDate(user.updatedAt)}</p>
+            {user?.deletedAt && <p>{convertDate(user.deletedAt)}</p>}
           </div>
         ))}
     </div>
