@@ -1,4 +1,4 @@
-package presentational
+package presenter
 
 import (
 	"context"
@@ -9,22 +9,22 @@ import (
 	"time"
 )
 
-type helloServer struct {
+type HelloPresenter struct {
 	hellopb.UnimplementedGreetingServiceServer
 }
 
-func NewHelloServer() *helloServer {
-	return &helloServer{}
+func NewHelloPresenter() *HelloPresenter {
+	return &HelloPresenter{}
 }
 
 // Hello is a simple unary RPC
-func (s *helloServer) Hello(ctx context.Context, req *hellopb.HelloRequest) (*hellopb.HelloResponse, error) {
+func (s *HelloPresenter) Hello(ctx context.Context, req *hellopb.HelloRequest) (*hellopb.HelloResponse, error) {
 	// get the name from the request
 	return &hellopb.HelloResponse{Message: fmt.Sprintf("Hello, %s!", req.GetName())}, nil
 }
 
 // HelloServerStream is a server streaming RPC
-func (s *helloServer) HelloServerStream(req *hellopb.HelloRequest, stream hellopb.GreetingService_HelloServerStreamServer) error {
+func (s *HelloPresenter) HelloServerStream(req *hellopb.HelloRequest, stream hellopb.GreetingService_HelloServerStreamServer) error {
 	resCount := 5
 	for i := 0; i < resCount; i++ {
 		// send a message to the client
@@ -40,7 +40,7 @@ func (s *helloServer) HelloServerStream(req *hellopb.HelloRequest, stream hellop
 }
 
 // HelloClientStream is a client streaming RPC
-func (s *helloServer) HelloClientStream(stream hellopb.GreetingService_HelloClientStreamServer) error {
+func (s *HelloPresenter) HelloClientStream(stream hellopb.GreetingService_HelloClientStreamServer) error {
 	nameList := make([]string, 0)
 	for {
 		// get request from the client
@@ -58,7 +58,7 @@ func (s *helloServer) HelloClientStream(stream hellopb.GreetingService_HelloClie
 }
 
 // HelloBiStreams is a bidirectional streaming RPC
-func (s *helloServer) HelloBiStreams(stream hellopb.GreetingService_HelloBiStreamsServer) error {
+func (s *HelloPresenter) HelloBiStreams(stream hellopb.GreetingService_HelloBiStreamsServer) error {
 	for {
 		// recieve request from the client
 		req, err := stream.Recv()

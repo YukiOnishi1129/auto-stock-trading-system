@@ -1,10 +1,8 @@
-package domain
+package database
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
-	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/database/entity"
 	"github.com/go-sql-driver/mysql"
 	"os"
 	"time"
@@ -41,16 +39,4 @@ func connectDB() (*sql.DB, error) {
 	}
 
 	return db, nil
-}
-
-func GetUsers(ctx context.Context) ([]*entity.User, error) {
-	db, dbErr := Init()
-	if dbErr != nil {
-		return nil, dbErr
-	}
-	users, qErr := entity.Users().All(ctx, db)
-	if qErr != nil {
-		return nil, qErr
-	}
-	return users, nil
 }
