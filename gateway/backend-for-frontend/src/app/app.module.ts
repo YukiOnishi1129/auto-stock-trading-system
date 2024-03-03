@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { GraphQLServerModule } from './graphql/graphql-server.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GraphQLServerModule } from '../graphql/graphql-server.module';
 import { join } from 'path';
 import { HelloModule } from './hello/hello.module';
 import { UserModule } from './user/user.module';
@@ -17,14 +15,14 @@ import { UserModule } from './user/user.module';
         options: {
           url: 'auto_stock_trading_system_user_service:3001',
           package: 'auto.trading.hello.v1',
-          protoPath: join(__dirname, 'proto/hello.proto'),
+          protoPath: join(__dirname, '../proto/hello.proto'),
         },
       },
     ]),
     HelloModule,
     UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

@@ -36,7 +36,9 @@ func (uu *UserUsecase) GetUsers(ctx context.Context) (*pb.UsersResponse, error) 
 			Name:      user.Name.String,
 			CreatedAt: timestamppb.New(user.CreatedAt),
 			UpdatedAt: timestamppb.New(user.UpdatedAt),
+			DeletedAt: timestamppb.New(user.DeletedAt.Time),
 		})
+
 	}
 	return &pb.UsersResponse{
 		Users: resUsers,

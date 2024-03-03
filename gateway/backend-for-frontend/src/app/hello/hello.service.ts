@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit, Inject } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { Hello } from '../graphql/types/graphql';
-import { GreetingServiceClient, HelloRequest } from '../grpc/hello';
+import { Hello } from '../../graphql/types/graphql';
+import { GreetingServiceClient, HelloRequest } from '../../grpc/hello';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()

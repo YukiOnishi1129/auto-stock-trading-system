@@ -35,6 +35,7 @@ export interface User {
   name: string;
   createdAt: Timestamp | undefined;
   updatedAt: Timestamp | undefined;
+  deletedAt?: Timestamp | undefined;
 }
 
 export interface UserResponse {
