@@ -30,14 +30,17 @@ func (uu *UserUsecase) GetUsers(ctx context.Context) (*pb.UsersResponse, error) 
 
 	resUsers := make([]*pb.User, 0)
 	for _, user := range users {
-		resUsers = append(resUsers, &pb.User{
+		resUser := &pb.User{
 			Id:        strconv.Itoa(user.ID),
 			Email:     user.Email.String,
 			Name:      user.Name.String,
 			CreatedAt: timestamppb.New(user.CreatedAt),
 			UpdatedAt: timestamppb.New(user.UpdatedAt),
-			DeletedAt: timestamppb.New(user.DeletedAt.Time),
-		})
+		}
+		if !user.DeletedAt.Valid {
+			resUser.DeletedAt = timestamppb.New(user.DeletedAt.Time)
+		}
+		resUsers = append(resUsers, resUser)
 
 	}
 	return &pb.UsersResponse{

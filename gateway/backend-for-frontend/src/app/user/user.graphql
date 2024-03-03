@@ -2,9 +2,9 @@ type User {
   id: ID!
   name: String!
   email: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
 }
 
 type Query {
