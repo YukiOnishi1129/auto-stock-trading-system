@@ -5,7 +5,7 @@ import {
   GreetingServiceClient,
   HelloRequest,
   HelloResponse,
-} from './grpc/hello';
+} from '../grpc/hello';
 
 @Injectable()
 export class AppService implements OnModuleInit {

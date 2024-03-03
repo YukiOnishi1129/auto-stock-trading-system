@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { GraphQLServerModule } from './graphql/graphql-server.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GraphQLServerModule } from '../graphql/graphql-server.module';
 import { join } from 'path';
 import { HelloModule } from './hello/hello.module';
 import { UserModule } from './user/user.module';
@@ -24,7 +22,7 @@ import { UserModule } from './user/user.module';
     HelloModule,
     UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
