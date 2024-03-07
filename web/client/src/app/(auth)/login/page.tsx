@@ -1,15 +1,10 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { signIn } from "next-auth/react";
+import { LoginForm } from "@/features/auth/LoginForm";
 
 export default function Login() {
   return (
-    <>
-      <div>ログインページ</div>
-      <Button onClick={() => signIn("google", { callbackUrl: "/" })}>
-        ログイン
-      </Button>
-    </>
+    <div className="w-[40%] mx-auto">
+      <div className="text-center">Login Page</div>
+      <LoginForm />
+    </div>
   );
 }
