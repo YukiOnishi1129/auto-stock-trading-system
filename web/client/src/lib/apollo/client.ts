@@ -1,6 +1,6 @@
 import { ApolloClient, HttpLink, InMemoryCache, from } from "@apollo/client";
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
 import { onError } from "@apollo/client/link/error";
+import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)

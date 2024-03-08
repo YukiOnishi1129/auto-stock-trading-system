@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+
 import { ApolloWrapper } from "@/lib/apollo/apollo-wrapper";
 
 export function Providers({ children }: { children: React.ReactNode }) {

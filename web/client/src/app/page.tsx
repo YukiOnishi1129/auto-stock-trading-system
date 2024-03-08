@@ -1,6 +1,7 @@
-import { getClient } from "@/lib/apollo/client";
 import { gql } from "@apollo/client";
-import { GetHomeQuery, Query } from "@/graphql/graphql";
+
+import { GetHomeQuery } from "@/graphql/graphql";
+import { getClient } from "@/lib/apollo/client";
 import { convertDate } from "@/lib/date";
 
 export const GET_HOME = gql`

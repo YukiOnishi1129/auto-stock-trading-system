@@ -1,13 +1,13 @@
 "use client";
 
 import { HttpLink, from } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import {
   ApolloNextAppProvider,
   NextSSRApolloClient,
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
-import { onError } from "@apollo/client/link/error";
 
 function makeClient() {
   const httpLink = new HttpLink({

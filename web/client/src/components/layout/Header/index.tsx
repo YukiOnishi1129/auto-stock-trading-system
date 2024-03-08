@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
-import { NotLoggedMenu } from "@/components/layout/Header/NotLoggedMenu";
+
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { LoggedMenu } from "@/components/layout/Header/LoggedMenu";
+import { NotLoggedMenu } from "@/components/layout/Header/NotLoggedMenu";
 
 export const Header = async () => {
   const session = await getServerSession(authOptions);
