@@ -1,15 +1,18 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth/next";
+import { NotLoggedMenu } from "@/components/layout/Header/NotLoggedMenu";
+import { LoggedMenu } from "@/components/layout/Header/LoggedMenu";
 
-export const Header = () => {
+export const Header = async () => {
+  const session = await getServerSession(authOptions);
   return (
     <div className="fixed flex justify-between px-8 w-screen h-16 bg-white shadow-md items-center z-10">
       <h1 className="font-bold text-2xl">
         <Link href="/">auto trading system</Link>
       </h1>
       <div className="flex gap-3">
-        <Button variant={"outline"}>SignIn</Button>
-        <Button>Menu</Button>
+        {session ? <LoggedMenu /> : <NotLoggedMenu />}
       </div>
     </div>
   );
