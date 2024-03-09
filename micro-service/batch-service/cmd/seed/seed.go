@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"github.com/YukiOnishi1129/auto-stock-trading-system/batch-service/database/seed"
@@ -10,13 +11,14 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
 	conn, dbErr := connectDB()
 	if dbErr != nil {
 		fmt.Printf("Error connecting to DB\n")
 		panic(dbErr)
 	}
 
-	seedErr := seed.CreateInitData(conn)
+	seedErr := seed.CreateInitData(ctx, conn)
 	if seedErr != nil {
 		fmt.Printf("Error seeding data\n")
 		panic(seedErr)

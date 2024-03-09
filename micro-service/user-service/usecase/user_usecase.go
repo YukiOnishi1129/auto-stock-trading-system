@@ -6,7 +6,6 @@ import (
 	pb "github.com/YukiOnishi1129/auto-stock-trading-system/user-service/grpc"
 	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/infrastructure/mysql/repository"
 	"google.golang.org/protobuf/types/known/timestamppb"
-	"strconv"
 )
 
 type UserUsecaseInterface interface {
@@ -31,7 +30,7 @@ func (uu *UserUsecase) GetUsers(ctx context.Context) (*pb.UsersResponse, error) 
 	resUsers := make([]*pb.User, 0)
 	for _, user := range users {
 		resUser := &pb.User{
-			Id:        strconv.Itoa(user.ID),
+			Id:        user.ID,
 			Email:     user.Email.String,
 			Name:      user.Name.String,
 			CreatedAt: timestamppb.New(user.CreatedAt),

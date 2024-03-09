@@ -1,81 +1,47 @@
 package seed
 
 import (
+	"context"
 	"database/sql"
-	"fmt"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/YukiOnishi1129/auto-stock-trading-system/batch-service/usecase"
 )
 
-type createUserData struct {
-	ID       int64
-	Name     string
-	Email    string
-	Password string
+type CreateUserDataSeedInterface interface {
+	CreateUserData(db *sql.DB) error
 }
 
-func CreateUserData(con *sql.DB) error {
-	hashPassword, err := bcrypt.GenerateFromPassword([]byte("password"), bcrypt.DefaultCost)
-	if err != nil {
-		return err
-	}
-	insertDatas := []createUserData{
+type CreateUserDataSeed struct {
+	db *sql.DB
+	uu *usecase.UserUsecase
+}
+
+func NewCreateUserDataSeed(db *sql.DB, uu *usecase.UserUsecase) *CreateUserDataSeed {
+	return &CreateUserDataSeed{db, uu}
+}
+
+func (cu *CreateUserDataSeed) CreateUserData(ctx context.Context) error {
+
+	createUserDatas := []usecase.CreateUserDTO{
 		{
-			ID:       1,
-			Name:     "taro",
-			Email:    "taro@gmail.com",
-			Password: string(hashPassword),
+			Name:  "taro",
+			Email: "taro@gmail.com",
 		},
 		{
-			ID:       2,
-			Name:     "jiro",
-			Email:    "jiro@gmail.com",
-			Password: string(hashPassword),
+			Name:  "jiro",
+			Email: "jiro@gmail.com",
 		},
 		{
-			ID:       3,
-			Name:     "hanako",
-			Email:    "hanako@gmail.com",
-			Password: string(hashPassword),
+			Name:  "hanako",
+			Email: "hanako@gmail.com",
 		},
 	}
 
-	insSql := "INSERT INTO users (id, name, email, password) VALUES "
-	for _, insertData := range insertDatas {
-		insSql += fmt.Sprintf("('%v', '%v', '%v', '%v'),", insertData.ID, insertData.Name, insertData.Email, insertData.Password)
-	}
-	insSql = insSql[:len(insSql)-1]
-
-	ins, err := con.Prepare(insSql)
-	if err != nil {
-		return err
-	}
-	defer func() {
-		err := ins.Close()
+	for _, c := range createUserDatas {
+		_, err := cu.uu.CreateUser(ctx, c)
 		if err != nil {
-			return
+			return err
 		}
-	}()
-
-	_, err = ins.Exec()
-	if err != nil {
-		return err
 	}
 
-	get, getErr := con.Prepare("SELECT MAX(id) FROM users;")
-	if getErr != nil {
-		return getErr
-	}
-	defer func() {
-		err := get.Close()
-		if err != nil {
-			return
-		}
-	}()
-
-	_, err = get.Exec()
-	if err != nil {
-		return err
-	}
-	fmt.Println("create data at users table")
 	return nil
 }
