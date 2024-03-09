@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix .",
-    "gen:gql": "graphql-codegen --config ./src/graphql/cmd/codegen.ts"
+    "gen:gql": "graphql-codegen --config ./src/graphql/cmd/codegen.ts",
+    "gen:prisma": "prisma generate",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@apollo/client": "^3.9.5",
