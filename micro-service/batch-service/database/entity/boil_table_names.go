@@ -4,9 +4,15 @@
 package entity
 
 var TableNames = struct {
-	SchemaMigrations string
-	Users            string
+	Accounts           string
+	SchemaMigrations   string
+	Sessions           string
+	Users              string
+	VerificationTokens string
 }{
-	SchemaMigrations: "schema_migrations",
-	Users:            "users",
+	Accounts:           "accounts",
+	SchemaMigrations:   "schema_migrations",
+	Sessions:           "sessions",
+	Users:              "users",
+	VerificationTokens: "verification_tokens",
 }
