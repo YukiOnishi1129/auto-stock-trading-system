@@ -26,13 +26,19 @@ func (uu *UserUsecase) GetUsers(ctx context.Context) (*pb.UsersResponse, error) 
 	if rErr != nil {
 		return nil, rErr
 	}
-
 	resUsers := make([]*pb.User, 0)
+	if len(users) == 0 {
+		return &pb.UsersResponse{
+			Users: resUsers,
+		}, nil
+	}
+
 	for _, user := range users {
 		resUser := &pb.User{
 			Id:        user.ID,
 			Email:     user.Email.String,
 			Name:      user.Name.String,
+			Image:     user.Image.String,
 			CreatedAt: timestamppb.New(user.CreatedAt),
 			UpdatedAt: timestamppb.New(user.UpdatedAt),
 		}
@@ -40,7 +46,6 @@ func (uu *UserUsecase) GetUsers(ctx context.Context) (*pb.UsersResponse, error) 
 			resUser.DeletedAt = timestamppb.New(user.DeletedAt.Time)
 		}
 		resUsers = append(resUsers, resUser)
-
 	}
 	return &pb.UsersResponse{
 		Users: resUsers,

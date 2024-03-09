@@ -12,7 +12,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.error(`[Network error]: ${networkError}`);
 });
 
-const httpLink = new HttpLink({ uri: "http://localhost:4000/graphql" });
+const httpLink = new HttpLink({
+  uri: "http://localhost:4000/graphql",
+  fetchOptions: { cache: "no-store" },
+});
 
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({

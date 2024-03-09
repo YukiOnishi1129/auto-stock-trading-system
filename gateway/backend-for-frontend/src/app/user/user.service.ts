@@ -14,21 +14,29 @@ export class UserService implements OnModuleInit {
   }
 
   async getUsers(): Promise<Array<User>> {
-    const rpcResponse = this.userService.getUsers({});
-    const response = await lastValueFrom(rpcResponse);
-    const resUsers = response.users.map((user) => {
-      const resUser: User = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        createdAt: new Date(user.createdAt.seconds * 1000).toString(),
-        updatedAt: new Date(user.updatedAt.seconds * 1000).toString(),
-        deletedAt: user?.deletedAt?.nanos
-          ? new Date(user.deletedAt.seconds * 1000).toString()
-          : null,
-      };
-      return resUser;
-    });
-    return resUsers;
+    try {
+      const rpcResponse = this.userService.getUsers({});
+      if (!rpcResponse) return [];
+      const response = await lastValueFrom(rpcResponse);
+      if (!response.users) return [];
+
+      const resUsers = response.users.map((user) => {
+        const resUser: User = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          createdAt: new Date(user.createdAt.seconds * 1000).toString(),
+          updatedAt: new Date(user.updatedAt.seconds * 1000).toString(),
+          deletedAt: user?.deletedAt?.nanos
+            ? new Date(user.deletedAt.seconds * 1000).toString()
+            : null,
+        };
+        return resUser;
+      });
+      return resUsers;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }

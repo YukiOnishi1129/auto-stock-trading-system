@@ -33,6 +33,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  image: string;
   createdAt: Timestamp | undefined;
   updatedAt: Timestamp | undefined;
   deletedAt?: Timestamp | undefined;

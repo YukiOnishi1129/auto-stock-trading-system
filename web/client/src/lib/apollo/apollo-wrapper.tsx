@@ -12,6 +12,7 @@ import {
 function makeClient() {
   const httpLink = new HttpLink({
     uri: "http://localhost:4000/graphql",
+    fetchOptions: { cache: "no-store" },
   });
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {

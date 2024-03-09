@@ -14,7 +14,7 @@ services:
       - ${BFF_PORT}:${BFF_CONTAINER_PORT}
     depends_on:
       - user-service
-      - batch-service
+#      - batch-service
 
   user-service:
     container_name: ${USER_SERVICE_CONTAINER_NAME}
