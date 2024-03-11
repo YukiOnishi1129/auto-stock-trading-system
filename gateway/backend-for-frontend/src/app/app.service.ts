@@ -5,13 +5,16 @@ import {
   GreetingServiceClient,
   HelloRequest,
   HelloResponse,
-} from '../grpc/hello';
+} from 'src/grpc/hello';
 
 @Injectable()
 export class AppService implements OnModuleInit {
   private greetingService: GreetingServiceClient;
 
-  constructor(@Inject('HELLO_PACKAGE') private client: ClientGrpc) {}
+  constructor(
+    @Inject('HELLO_PACKAGE')
+    private client: ClientGrpc,
+  ) {}
 
   onModuleInit() {
     this.greetingService =
@@ -19,6 +22,8 @@ export class AppService implements OnModuleInit {
   }
 
   getHello(): Observable<HelloResponse> {
-    return this.greetingService.hello({ name: 'Nest' } as HelloRequest);
+    return this.greetingService.hello({
+      name: 'Nest',
+    } as HelloRequest);
   }
 }
