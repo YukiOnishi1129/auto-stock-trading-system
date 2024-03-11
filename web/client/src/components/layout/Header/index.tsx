@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { LoggedMenu } from "@/components/layout/Header/LoggedMenu";
 import { NotLoggedMenu } from "@/components/layout/Header/NotLoggedMenu";
 
