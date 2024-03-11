@@ -2,7 +2,10 @@ name: WEB_CLIENT_CI
 
 on:
   push:
-    branches: [main, develop, freatue/*]
+    branches: 
+      - "main"
+      - "develop"
+      - "feature/*"
     paths:
       - "web/client/*"
       - ".github/workflows/web_client_ci.yml"
