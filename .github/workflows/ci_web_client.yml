@@ -1,11 +1,10 @@
 name: WEB_CLIENT_CI
 
 on:
-  push:
+  pull_request:
     branches: 
       - "main"
       - "develop"
-      - "feature/*"
     paths:
       - "web/client/*"
       - ".github/workflows/web_client_ci.yml"
@@ -13,24 +12,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
     defaults:
       run:
-        working-directory: web/client
+        working-directory: ./web/client
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Set up Node.js
+      
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: "20"
+          node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --frozen-lockfile
+
+      - name: Lint
+        run: npm run lint
 
       - name: Build
         run: npm run build
 
-      - name: Lint
-        run: npm run lint
+
