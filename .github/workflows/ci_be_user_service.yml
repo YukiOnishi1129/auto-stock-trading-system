@@ -16,7 +16,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        go: ['1.22']
+        os: [macos-latest, windows-latest]
 
     defaults:
       run:
