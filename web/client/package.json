@@ -7,16 +7,34 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen:gql": "graphql-codegen --config ./src/graphql/cmd/codegen.ts"
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix .",
+    "gen:gql": "graphql-codegen --config ./src/graphql/cmd/codegen.ts",
+    "gen:prisma": "prisma generate",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@apollo/client": "^3.9.5",
     "@apollo/experimental-nextjs-app-support": "^0.8.0",
+    "@auth/prisma-adapter": "^1.5.0",
+    "@hookform/resolvers": "^3.3.4",
+    "@prisma/client": "^5.10.2",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "graphql": "^16.8.1",
+    "lucide-react": "^0.350.0",
     "next": "14.1.0",
+    "next-auth": "^4.24.6",
+    "prisma": "^5.10.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.0",
+    "shadcn-ui": "^0.8.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
@@ -27,11 +45,20 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.1.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "eslint-plugin-unused-imports": "^3.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^7.1.1"
   }
 }

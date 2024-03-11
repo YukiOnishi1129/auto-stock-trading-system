@@ -1,6 +1,8 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
-import { HelloService } from './hello.service';
+
 import { Hello } from '../../graphql/types/graphql';
+
+import { HelloService } from './hello.service';
 @Resolver('Hello')
 export class HelloResolver {
   constructor(private readonly helloService: HelloService) {}

@@ -15,16 +15,16 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-
 var (
 	scanner *bufio.Scanner
-	client hellopb.GreetingServiceClient
+	client  hellopb.GreetingServiceClient
 )
+
 func main() {
 	fmt.Println("start, gRPC Client!")
 
 	// create a scanner to read from the terminal
-	scanner  = bufio.NewScanner(os.Stdin)
+	scanner = bufio.NewScanner(os.Stdin)
 
 	// create a connection to the gRPC server
 	// "localhost:8080" is the address of the gRPC server
@@ -55,24 +55,24 @@ func main() {
 		in := scanner.Text()
 
 		switch in {
-			case "1":
-				Hello()
+		case "1":
+			Hello()
 
-			case "2":
-				HelloServerStream()
+		case "2":
+			HelloServerStream()
 
-			case "3":
-				HelloClientStream()
+		case "3":
+			HelloClientStream()
 
-			case "4":
-				HelloBiStream()
+		case "4":
+			HelloBiStream()
 
-			case "5":
-				fmt.Println("bye.")
-				goto M
+		case "5":
+			fmt.Println("bye.")
+			goto M
 		}
 	}
-	M:
+M:
 }
 
 func Hello() {
@@ -93,7 +93,7 @@ func Hello() {
 			fmt.Printf("details: %s\n", stat.Details())
 		} else {
 			fmt.Println(err)
-		}	
+		}
 	} else {
 		// print the response message
 		fmt.Println(res.GetMessage())
@@ -149,7 +149,7 @@ func HelloClientStream() {
 		name := scanner.Text()
 
 		// send the request message to the gRPC server
-		if err :=stream.Send(&hellopb.HelloRequest{Name: name}); err != nil {
+		if err := stream.Send(&hellopb.HelloRequest{Name: name}); err != nil {
 			fmt.Println(err)
 			return
 		}
@@ -189,7 +189,7 @@ func HelloBiStream() {
 				fmt.Println(err)
 				return
 			}
-			
+
 			if sendCount == sendNum {
 				sendEnd = true
 				if err := stream.CloseSend(); err != nil {
@@ -201,9 +201,9 @@ func HelloBiStream() {
 		// recieve the response message from the gRPC server
 		if !recvEnd {
 			if res, err := stream.Recv(); err != nil {
-				if errors.Is(err, io.EOF) {
-					recvEnd = true
-				} 
+				//if errors.Is(err, io.EOF) {
+				//	recvEnd = true
+				//}
 				recvEnd = true
 			} else {
 				fmt.Println(res)

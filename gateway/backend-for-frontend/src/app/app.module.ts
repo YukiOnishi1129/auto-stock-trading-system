@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
+
 import { GraphQLServerModule } from '../graphql/graphql-server.module';
+
 import { HelloModule } from './hello/hello.module';
-import { UserModule } from './user/user.module';
 import { ScalerModule } from './scaler/scaler.module';
+import { UserModule } from './user/user.module';
 @Module({
+  controllers: [],
   imports: [
     GraphQLServerModule,
     // ClientsModule.register([
@@ -21,7 +24,6 @@ import { ScalerModule } from './scaler/scaler.module';
     UserModule,
     ScalerModule,
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}

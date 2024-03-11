@@ -1,6 +1,6 @@
-import dayjs from "dayjs";
+import dayjs, { locale } from "dayjs";
 
-dayjs.locale("ja");
+locale("ja");
 
 export const convertDate = (date: Date | string) => {
   return dayjs(date).format("YYYY-MM-DD HH:mm:ss");

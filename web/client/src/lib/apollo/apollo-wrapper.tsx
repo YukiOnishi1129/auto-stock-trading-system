@@ -1,17 +1,18 @@
 "use client";
 
-import { ApolloLink, HttpLink, from } from "@apollo/client";
+import { HttpLink, from } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import {
   ApolloNextAppProvider,
   NextSSRApolloClient,
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
-import { onError } from "@apollo/client/link/error";
 
 function makeClient() {
   const httpLink = new HttpLink({
     uri: "http://localhost:4000/graphql",
+    fetchOptions: { cache: "no-store" },
   });
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {

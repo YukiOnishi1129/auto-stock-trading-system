@@ -1,14 +1,18 @@
 package seed
 
-import "database/sql"
-
-var (
-	err error
+import (
+	"context"
+	"database/sql"
 )
 
-func CreateInitData(con *sql.DB) error {
-	if err = CreateUserData(con); err != nil {
-		return err
-	}
+func CreateInitData(ctx context.Context, db *sql.DB) error {
+
+	//ur := repository.NewUserRepository(db)
+	//uu := usecase.NewUserUsecase(ur)
+	//
+	//uc := NewCreateUserDataSeed(db, uu)
+	//if err = uc.CreateUserData(ctx); err != nil {
+	//	return err
+	//}
 	return nil
 }

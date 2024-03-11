@@ -25,6 +25,9 @@ user-ssh:
 batch-ssh:
 	docker exec -it $(BATCH_SERVICE_CONTAINER_NAME) sh
 
+# create migration file
+create-migration:
+	docker exec -it ${BATCH_SERVICE_CONTAINER_NAME} sh -c "migrate create -ext sql -dir migrations -seq $(name)"
 
 # db migration
 db-migrate:

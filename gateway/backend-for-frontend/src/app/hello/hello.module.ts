@@ -1,20 +1,22 @@
+import { join } from 'path';
+
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { HelloService } from './hello.service';
+
 import { HelloResolver } from './hello.resolver';
-import { join } from 'path';
+import { HelloService } from './hello.service';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
         name: 'HELLO_PACKAGE',
-        transport: Transport.GRPC,
         options: {
-          url: 'auto_stock_trading_system_user_service:3001',
           package: 'auto.trading.hello.v1',
           protoPath: join(__dirname, '../../proto/hello.proto'),
+          url: 'auto_stock_trading_system_user_service:3001',
         },
+        transport: Transport.GRPC,
       },
     ]),
   ],

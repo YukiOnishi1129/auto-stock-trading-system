@@ -1,10 +1,11 @@
-import { GraphQLDefinitionsFactory } from '@nestjs/graphql';
 import { join } from 'path';
+
+import { GraphQLDefinitionsFactory } from '@nestjs/graphql';
 new GraphQLDefinitionsFactory().generate({
-  typePaths: ['./src/**/*.graphql'],
-  path: join(process.cwd(), 'src/graphql/types/graphql.ts'),
-  outputAs: 'class',
   customScalarTypeMapping: {
     // Date: 'Date',
   },
+  outputAs: 'class',
+  path: join(process.cwd(), 'src/graphql/types/graphql.ts'),
+  typePaths: ['./src/**/*.graphql'],
 });
