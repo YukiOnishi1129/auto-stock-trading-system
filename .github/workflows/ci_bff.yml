@@ -1,0 +1,45 @@
+name: BFF_CI
+
+on:
+  push:
+    branches: 
+      - "main"
+      - "develop"
+      - "feature/*"
+    paths:
+      - "gateway/backend-for-frontend/**"
+      - ".github/workflows/ci_bff.yml"
+#
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    defaults:
+      run:
+        working-directory: ./gateway/backend-for-frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: ./gateway/backend-for-frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm install --frozen-lockfile
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+
