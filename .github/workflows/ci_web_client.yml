@@ -9,7 +9,7 @@ on:
     paths:
       - "web/client/*"
       - ".github/workflows/ci_web_client.yml"
-
+#
 jobs:
   build:
     runs-on: ubuntu-latest
