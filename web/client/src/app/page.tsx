@@ -36,7 +36,7 @@ export default async function Home() {
   // if (!data?.users?.[0]?.id) return;
   return (
     <div>
-      <p>テストです</p>
+      <p>テスト</p>
       <p>{hello?.message}</p>
       {data.users &&
         data?.users.map((user) => (
