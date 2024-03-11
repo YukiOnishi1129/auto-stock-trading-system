@@ -7,7 +7,7 @@ on:
       - "develop"
       - "feature/*"
     paths:
-      - "web/client/*"
+      - "web/client/**"
       - ".github/workflows/ci_web_client.yml"
 #
 jobs:
