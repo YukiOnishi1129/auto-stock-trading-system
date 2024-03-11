@@ -4,7 +4,7 @@ import { GetHomeQuery } from "@/graphql/graphql";
 import { getClient } from "@/lib/apollo/client";
 import { convertDate } from "@/lib/date";
 
-export const GET_HOME = gql`
+const GET_HOME = gql`
   query getHome($name: String!) {
     hello(name: $name) {
       message
