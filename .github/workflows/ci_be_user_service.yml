@@ -1,0 +1,42 @@
+name: BE_USER_SERVICE_CI
+
+on:
+  push:
+    branches: 
+      - "main"
+      - "develop"
+      - "feature/*"
+    paths:
+      - "micro-service/user-service/**"
+      - ".github/workflows/ci_be_user_service.yml"
+#
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    defaults:
+      run:
+        working-directory: ./micro-service/user-service
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '>=1.22.0'
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: Go Lint
+        uses: golangci/golangci-lint-action@v3
+
+      - name: Go Build
+        run: go build -v ./...
+
+
