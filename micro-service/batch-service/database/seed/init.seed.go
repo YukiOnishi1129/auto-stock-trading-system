@@ -5,10 +5,6 @@ import (
 	"database/sql"
 )
 
-var (
-	err error
-)
-
 func CreateInitData(ctx context.Context, db *sql.DB) error {
 
 	//ur := repository.NewUserRepository(db)
