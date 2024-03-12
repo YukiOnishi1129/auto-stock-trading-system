@@ -43,6 +43,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
             version: latest
+            working-directory: ./micro-service/user-service
             args: ./...
 
       - name: Go Build
