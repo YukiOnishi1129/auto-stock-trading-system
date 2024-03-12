@@ -37,16 +37,13 @@ jobs:
 
       - name: Install dependencies
         run: go mod download
-             go install go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.56.2
-    
-      - name: Go lint
-        run: make lint
+            #  go install go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.56.2
 
-    #   - name: Go Lint
-    #     uses: golangci/golangci-lint-action@v3
-    #     with:
-    #         version: latest
-    #         args: --timeout=5m
+      - name: Go Lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+            version: latest
+            args: ./...
 
       - name: Go Build
         run: go build -v ./...
