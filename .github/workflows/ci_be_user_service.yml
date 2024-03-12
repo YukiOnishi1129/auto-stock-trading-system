@@ -45,8 +45,12 @@ jobs:
       - name: Go Lint
         uses: reviewdog/action-golangci-lint@v2
         with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            go_version: ${{ matrix.go }}
+            reporter: github-pr-review
+            level: warning
             # version: latest
-            working-directory: ./micro-service/user-service
+            working-directory: ./micro-service/user-service/
             golangci_lint_flags: "--config=.golangci.yml"
 
       - name: Go Build
