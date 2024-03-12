@@ -149,7 +149,8 @@ func HelloClientStream() {
 		name := scanner.Text()
 
 		// send the request message to the gRPC server
-		if err := stream.Send(&hellopb.HelloRequest{Name: name}); err != nil {
+		stErr := stream.Send(&hellopb.HelloRequest{Name: name}); 
+		if stErr != nil {
 			fmt.Println(err)
 			return
 		}
@@ -201,9 +202,6 @@ func HelloBiStream() {
 		// recieve the response message from the gRPC server
 		if !recvEnd {
 			if res, err := stream.Recv(); err != nil {
-				//if errors.Is(err, io.EOF) {
-				//	recvEnd = true
-				//}
 				recvEnd = true
 			} else {
 				fmt.Println(res)

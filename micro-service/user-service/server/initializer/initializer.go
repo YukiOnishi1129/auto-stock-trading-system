@@ -2,6 +2,11 @@ package initializer
 
 import (
 	"fmt"
+	"log"
+	"net"
+	"os"
+	"os/signal"
+
 	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/database"
 	pb "github.com/YukiOnishi1129/auto-stock-trading-system/user-service/grpc"
 	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/infrastructure/mysql/repository"
@@ -9,10 +14,6 @@ import (
 	"github.com/YukiOnishi1129/auto-stock-trading-system/user-service/usecase"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"log"
-	"net"
-	"os"
-	"os/signal"
 )
 
 func Init() {
@@ -34,7 +35,6 @@ func Init() {
 	up := presenter.NewUserPresenter(uu)
 
 	// crate a listener on TCP port 3001
-	//port := os.Getenv("USER_SERVICE_CONTAINER_PORT")
 	port := 3001
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
