@@ -34,12 +34,15 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
           cache: false
+    
+      - name: Go lint
+        run: make lint
 
-      - name: Go Lint
-        uses: golangci/golangci-lint-action@v3
-        with:
-            version: latest
-            args: --timeout=5m
+    #   - name: Go Lint
+    #     uses: golangci/golangci-lint-action@v3
+    #     with:
+    #         version: latest
+    #         args: --timeout=5m
 
       - name: Go Build
         run: go build -v ./...
