@@ -43,10 +43,10 @@ jobs:
         run: pwd
 
       - name: Go Lint
-        uses: golangci/golangci-lint-action@v3
+        uses: reviewdog/action-golangci-lint@v2
         with:
-            version: latest
-            # working-directory: ./micro-service/user-service
+            # version: latest
+            working-directory: ./micro-service/user-service
             golangci_lint_flags: "--config=.golangci.yml"
 
       - name: Go Build
