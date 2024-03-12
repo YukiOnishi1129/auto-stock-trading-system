@@ -7,6 +7,7 @@ linters:
   enable:
     - govet
     - unused
-    - gocritic
+    # - gocritic
+    - staticcheck
     - stylecheck
     - errcheck
