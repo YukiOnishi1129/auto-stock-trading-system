@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Setup Go
         uses: actions/setup-go@v3
@@ -41,13 +41,13 @@ jobs:
 
       - name: go pwd
         run: pwd
-        
+
       - name: Go Lint
         uses: golangci/golangci-lint-action@v3
         with:
             version: latest
-            # working-directory: ./micro-service/user-service
-            # args: ./...
+            working-directory: ./micro-service/user-service
+            golangci_lint_flags: "--config=.golangci.yml"
 
       - name: Go Build
         run: go build -v ./...
