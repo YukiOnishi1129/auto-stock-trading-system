@@ -46,7 +46,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
             version: latest
-            working-directory: ./micro-service/user-service
+            # working-directory: ./micro-service/user-service
             golangci_lint_flags: "--config=.golangci.yml"
 
       - name: Go Build
