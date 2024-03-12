@@ -37,15 +37,14 @@ jobs:
 
       - name: Install dependencies
         run: go mod download
-            #  go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
             
 
-    #   - name: Go Lint
-    #     run: make lint
-      - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v3
-        with:
-          version: latest
+      - name: Go Lint
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest && make lint
+    #   - name: Run golangci-lint
+    #     uses: golangci/golangci-lint-action@v3
+    #     with:
+    #       version: latest
         # uses: reviewdog/action-golangci-lint@v2
         # with:
         #   github_token: ${{ secrets.GITHUB_TOKEN }}
