@@ -43,15 +43,16 @@ jobs:
         run: pwd
 
       - name: Go Lint
-        uses: reviewdog/action-golangci-lint@v2
-        with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            go_version: ${{ matrix.go }}
-            reporter: github-pr-review
-            level: warning
-            # version: latest
-            working-directory: ./micro-service/user-service/
-            golangci_lint_flags: "--config=.golangci.yml"
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.56.2 && make lint
+        # uses: reviewdog/action-golangci-lint@v2
+        # with:
+        #     github_token: ${{ secrets.GITHUB_TOKEN }}
+        #     go_version: ${{ matrix.go }}
+        #     reporter: github-pr-review
+        #     level: warning
+        #     # version: latest
+        #     working-directory: ./micro-service/user-service/
+        #     golangci_lint_flags: "--config=.golangci.yml"
 
       - name: Go Build
         run: go build -v ./...
