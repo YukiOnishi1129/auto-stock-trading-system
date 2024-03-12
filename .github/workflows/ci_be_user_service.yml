@@ -43,10 +43,16 @@ jobs:
     #   - name: Go Lint
     #     run: make lint
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v2
+        uses: reviewdog/action-golangci-lint@v2
         with:
-            version: latest
-            args: ./...
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          golangci_lint_flags: "--config=./.golangci.yml ./..."
+          fail_on_error: true
+          reporter: "github-pr-review"
+        # uses: golangci/golangci-lint-action@v2
+        # with:
+        #     version: latest
+        #     args: ./...
     
       - name: Go Build
         run: go build -v ./...
