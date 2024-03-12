@@ -1,0 +1,63 @@
+name: BE_USER_SERVICE_CI
+
+on:
+  push:
+    branches: 
+      - "main"
+      - "develop"
+      - "feature/*"
+    paths:
+      - "micro-service/user-service/**"
+      - ".github/workflows/ci_be_user_service.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        go: ['1.22']
+
+    defaults:
+      run:
+        working-directory: ./micro-service/user-service
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go }}
+          cache: false
+
+      - name: Install dependencies
+        run: go mod download
+            
+
+      - name: Go Lint
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest && make lint
+    #   - name: Run golangci-lint
+    #     uses: golangci/golangci-lint-action@v3
+    #     with:
+    #       version: latest
+        # uses: reviewdog/action-golangci-lint@v2
+        # with:
+        #   github_token: ${{ secrets.GITHUB_TOKEN }}
+        #   golangci_lint_flags: "--config=./.golangci.yml ./..."
+        #   fail_on_error: true
+        #   reporter: "github-pr-review"
+        #   workdir: micro-service/user-service/
+        # uses: golangci/golangci-lint-action@v2
+        # with:
+        #     version: latest
+        #     args: ./...
+    
+      - name: Go Build
+        run: go build -v ./...
+
+

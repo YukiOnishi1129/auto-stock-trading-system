@@ -1,0 +1,48 @@
+name: BE_BATCH_SERVICE_CI
+
+on:
+  push:
+    branches: 
+      - "main"
+      - "develop"
+      - "feature/*"
+    paths:
+      - "micro-service/batch-service/**"
+      - ".github/workflows/ci_be_batch_service.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        go: ['1.22']
+
+    defaults:
+      run:
+        working-directory: ./micro-service/batch-service
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go }}
+          cache: false
+
+      - name: Install dependencies
+        run: go mod download
+            
+
+      - name: Go Lint
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest && make lint
+    
+      - name: Go Build
+        run: go build -v ./...
+
+
